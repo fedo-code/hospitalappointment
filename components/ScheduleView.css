@@ -1,0 +1,35 @@
+.schedule-container {
+  width: 100%;
+  padding: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* ✅ stack on small screens */
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.header-left h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.header-right {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-right {
+    justify-content: flex-start;
+  }
+}

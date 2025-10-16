@@ -1,0 +1,51 @@
+:root{
+  --bg:#0f172a;
+  --panel:#0b1220;
+  --muted:#94a3b8;
+  --text:#e2e8f0;
+  --border:#1f2937;
+  --red:#ef4444;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background:var(--bg); color:var(--text);
+}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.card{background:linear-gradient(180deg,var(--panel),#0a0f1a);border:1px solid var(--border);border-radius:14px;padding:20px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.button{border:1px solid var(--border);background:#111827;color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
+.button[aria-pressed="true"], .button.primary{background:#3b82f6;border-color:transparent;color:white}
+.select{background:#0b1220;border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:10px}
+.badge{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);padding:4px 8px;border-radius:999px;font-size:12px;color:var(--muted)}
+.small{font-size:12px;color:var(--muted)}
+.hint{font-size:12px;color:var(--muted);margin-top:8px}
+.header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.grid{display:grid}
+
+/* Calendar */
+.calendar{
+  display:grid; grid-template-columns: 72px 1fr; gap:0; border:1px solid var(--border); border-radius:12px; overflow:hidden;
+}
+.timeline{background:#0b1020;border-right:1px solid var(--border)}
+.timeline .slot{height:40px;border-bottom:1px solid #0f1a2a;display:flex;align-items:flex-start;justify-content:flex-end;padding:6px 8px;color:var(--muted);font-size:12px}
+
+.day-col{position:relative;background:#0b1220}
+.day-col .row{height:40px;border-bottom:1px dashed #0f1a2a}
+
+.appointment{position:absolute;border-radius:10px;padding:8px 10px;border:1px solid rgba(255,255,255,0.06);overflow:hidden}
+.appointment .title{font-weight:600;font-size:13px}
+.appointment .meta{font-size:11px;opacity:0.9}
+.appointment .len{font-size:11px;opacity:0.8}
+
+/* Week view */
+.week{
+  display:grid; grid-template-columns: 72px repeat(7, 1fr); border:1px solid var(--border); border-radius:12px; overflow:hidden;
+}
+.week .dayhead{background:#0b1020;border-bottom:1px solid var(--border);padding:8px;text-align:center;font-size:12px;color:var(--muted)}
+.week .timecell{height:40px;border-bottom:1px dashed #0f1a2a}
+.week .daycell{position:relative;background:#0b1220;border-left:1px solid var(--border)}
+
+.nowline{position:absolute;left:0;right:0;height:2px;background:var(--red);box-shadow:0 0 8px var(--red)}
