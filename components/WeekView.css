@@ -3,30 +3,60 @@
   overflow-x: auto;
 }
 
-/* Header button row */
+/* Header button */
 .weekview-header {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
 }
 
-/* 🌟 Main Week Grid Layout */
-.week-grid {
+/* 🌟 Main Week Grid Layout (timeline + days) */
+.weekview-grid {
   display: flex;
-  flex-wrap: nowrap; /* ✅ All 7 days stay side by side on large screens */
-  gap: 10px;
-  overflow-x: auto; /* ✅ allow horizontal scroll on smaller laptops */
+  flex-direction: row;
+  width: 100%;
+  overflow-x: auto;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 🕒 Left side timeline */
+.week-timeline {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 70px;
+  background: rgba(255, 255, 255, 0.03);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: right;
+  font-size: 0.85rem;
+  padding-right: 6px;
+}
+
+.time-slot {
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 📅 Right side days container */
+.week-days-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow-x: auto;
+  flex: 1;
 }
 
 /* Each day column */
 .day-column {
   flex: 1;
-  min-width: 250px; /* ✅ keeps each day readable */
+  min-width: 220px;
   position: relative;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  padding: 6px;
+  padding: 5px;
   height: 600px;
   overflow-y: auto;
 }
@@ -34,8 +64,8 @@
 .dayhead {
   text-align: center;
   font-weight: 600;
-  margin-bottom: 6px;
-  font-size: 0.95rem;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
 }
 
 /* Appointment box */
@@ -46,10 +76,11 @@
   padding: 4px;
   box-sizing: border-box;
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  border: 1px solid transparent;
 }
 
-/* 🟥 Current date red line */
+/* Red line */
 .nowline {
   position: absolute;
   left: 0;
@@ -60,16 +91,34 @@
   z-index: 5;
 }
 
-/* 📱 Small Screen Responsive */
+/* ✅ Small Screen Responsive */
 @media (max-width: 768px) {
-  .week-grid {
-    flex-direction: column; /* ✅ Show one day above another */
-    gap: 15px;
-    overflow-x: hidden; /* ✅ Prevent side scroll */
+  .weekview-grid {
+    flex-direction: column;
+  }
+
+  .week-timeline {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .time-slot {
+    height: auto;
+    line-height: normal;
+    padding: 4px;
+    border: none;
+  }
+
+  .week-days-wrapper {
+    flex-direction: column; /* ✅ Show one day below another */
+    overflow-x: hidden;
   }
 
   .day-column {
-    min-width: 100%; /* ✅ Each day takes full width */
-    height: auto; /* auto height */
+    min-width: 100%;
+    height: auto;
   }
 }

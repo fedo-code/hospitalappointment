@@ -27,46 +27,61 @@ export function WeekView({
         </button>
       </div>
 
-      <div className="week-grid">
-        {days.map((d) => (
-          <div key={d.key} className="day-column">
-            <div className="dayhead">{format(d.date, "EEE dd MMM")}</div>
+      <div className="weekview-grid">
+        {/* Left side timeline */}
+        <aside className="week-timeline">
+          {slots.map((s) => (
+            <div className="time-slot" key={s.key}>
+              {s.label}
+            </div>
+          ))}
+        </aside>
 
-            {slots.map((s) => (
-              <div className="timecell" key={s.key} />
-            ))}
+        {/* Right side days section */}
+        <div className="week-days-wrapper">
+          {days.map((d) => (
+            <div key={d.key} className="day-column">
+              <div className="dayhead">{format(d.date, "EEE dd MMM")}</div>
 
-            {nowPosition && nowPosition.dayKey === d.key && (
-              <div className="nowline" style={{ top: nowPosition.top }} />
-            )}
+              {/* Background time grid */}
+              {slots.map((s) => (
+                <div className="timecell" key={s.key} />
+              ))}
 
-            {dayItems[d.key]?.map((it) => {
-              const c = colorForType(it.type);
-              const boxHeight = Math.max(minutesToHeight(it.durationMin), 60);
-              return (
-                <div
-                  key={it.id}
-                  className="appointment-box"
-                  style={{
-                    top: it.top,
-                    height: boxHeight,
-                    background: c.bg,
-                    borderColor: c.border,
-                    overflowY: it.durationMin <= 30 ? "auto" : "visible",
-                  }}
-                >
-                  <div className="title">
-                    {it.patientName} – {it.typeLabel}
+              {/* Red line (current date marker) */}
+              {nowPosition && nowPosition.dayKey === d.key && (
+                <div className="nowline" style={{ top: nowPosition.top }} />
+              )}
+
+              {/* Appointments */}
+              {dayItems[d.key]?.map((it) => {
+                const c = colorForType(it.type);
+                const boxHeight = Math.max(minutesToHeight(it.durationMin), 60);
+                return (
+                  <div
+                    key={it.id}
+                    className="appointment-box"
+                    style={{
+                      top: it.top,
+                      height: boxHeight,
+                      background: c.bg,
+                      borderColor: c.border,
+                      overflowY: it.durationMin <= 30 ? "auto" : "visible",
+                    }}
+                  >
+                    <div className="title">
+                      {it.patientName} – {it.typeLabel}
+                    </div>
+                    <div className="meta">
+                      {format(it.start, "HH:mm")}–{format(it.end, "HH:mm")}
+                    </div>
+                    <div className="len">{it.durationMin} min</div>
                   </div>
-                  <div className="meta">
-                    {format(it.start, "HH:mm")}–{format(it.end, "HH:mm")}
-                  </div>
-                  <div className="len">{it.durationMin} min</div>
-                </div>
-              );
-            })}
-          </div>
-        ))}
+                );
+              })}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
