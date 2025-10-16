@@ -3,49 +3,73 @@
   overflow-x: auto;
 }
 
+/* Header button row */
 .weekview-header {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
 }
 
+/* 🌟 Main Week Grid Layout */
 .week-grid {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* ✅ All 7 days stay side by side on large screens */
   gap: 10px;
+  overflow-x: auto; /* ✅ allow horizontal scroll on smaller laptops */
 }
 
+/* Each day column */
 .day-column {
   flex: 1;
-  min-width: 250px;
+  min-width: 250px; /* ✅ keeps each day readable */
   position: relative;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  overflow-y: auto;
+  padding: 6px;
   height: 600px;
+  overflow-y: auto;
 }
 
 .dayhead {
   text-align: center;
-  margin-bottom: 4px;
-  font-weight: 500;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
 }
 
+/* Appointment box */
 .appointment-box {
   position: absolute;
-  width: 100%;
-  border: 1px solid transparent;
+  width: 95%;
   border-radius: 8px;
-  color: white;
   padding: 4px;
   box-sizing: border-box;
+  color: #fff;
   font-size: 0.9rem;
 }
 
+/* 🟥 Current date red line */
+.nowline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #ff4d4f;
+  box-shadow: 0 0 8px rgba(255, 77, 79, 0.7);
+  z-index: 5;
+}
+
+/* 📱 Small Screen Responsive */
 @media (max-width: 768px) {
   .week-grid {
-    flex-direction: column;
+    flex-direction: column; /* ✅ Show one day above another */
+    gap: 15px;
+    overflow-x: hidden; /* ✅ Prevent side scroll */
+  }
+
+  .day-column {
+    min-width: 100%; /* ✅ Each day takes full width */
+    height: auto; /* auto height */
   }
 }
